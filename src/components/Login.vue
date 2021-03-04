@@ -44,58 +44,55 @@ export default {
     return {
       // 这是登录表单存储的数据
       loginForm: {
-        username: "admin",
-        password: "123456",
+        username: 'admin',
+        password: '123456',
       },
       loginFormRules: {
         username: [
-          { required: true, message: "请输入用户名称", trigger: "blur" },
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
           {
             min: 3,
             max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
+            message: '长度在 3 到 10 个字符',
+            trigger: 'blur',
           },
         ],
         password: [
-          { required: true, message: "请输入用户密码", trigger: "blur" },
+          { required: true, message: '请输入用户密码', trigger: 'blur' },
           {
             min: 6,
             max: 15,
-            message: "长度在 6 到 15 个字符",
-            trigger: "blur",
+            message: '长度在 6 到 15 个字符',
+            trigger: 'blur',
           },
         ],
       },
-    };
+    }
   },
   methods: {
     //重置表单
     resetLoginForm() {
-      this.$refs.loginFromRef.resetFields();
+      this.$refs.loginFromRef.resetFields()
     },
     //登录表单
     login() {
       this.$refs.loginFromRef.validate(async (valid) => {
-        if (!valid) return;
+        if (!valid) return
         // console.log(this.loginForm);
-        const result = await this.$http.post("login", this.loginForm);
-        const res=result.data;
-        if (res.meta.status !== 200)
-          return this.$message.error("登录失败");
-        this.$message.success("登录成功");
+        const { data: res } = await this.$http.post('login', this.loginForm)
+
+        if (res.meta.status !== 200) return this.$message.error('登录失败')
+        this.$message.success('登录成功')
         // 1.将登录成功之后的token，保存到客户端的sessionStorage中
         //  1.1项目中出了登录之外的其他API接口，必须在登录之后才能访问
         //  1.2token只应在当前在网站打开期间生效，所以将token保存在sessionStorage中
-        console.log(res.data.token,"1111111111111");
-        window.sessionStorage.setItem("token",res.data.token)
+        window.sessionStorage.setItem('token', res.data.token)
         // 2.通过编程式导航跳转到后台主页，路由地址是/home
-        this.$router.push("/home")
-        console.log(res)
-      });
+        this.$router.push('/home')
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
