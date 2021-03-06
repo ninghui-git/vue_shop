@@ -1,5 +1,5 @@
 <template>
-  <div>Welecome组件</div>
+  <div></div>
 </template>
 
 <script>
