@@ -98,7 +98,7 @@
             clearable
             change-on-select
           ></el-cascader>
-        </el-form-item>
+        </el-form-item> 
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addCateDialogVisible = false">取 消</el-button>
